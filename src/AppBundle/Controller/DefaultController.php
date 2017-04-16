@@ -57,7 +57,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/team", name="team")
+     * @Route("/teams/create", name="team_create")
      */
     public function teamAction(Request $request)
     {
@@ -70,23 +70,13 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($team);
             $em->flush();
-            return $this->redirectToRoute('team_creation_success');
+            return $this->render('create/team.html.twig', [
+              'sent'=>true,
+            ]);
         }
-        return $this->render('default/team.html.twig', [
+        return $this->render('create/team.html.twig', [
           'form'=>$form->createView(),
         ]);
     }
-
-    /**
-     * @Route("/team/created", name="team_creation_success")
-     */
-    public function teamCreatedSuccessAction(Request $request)
-    {
-        return $this->render('default/team_created.html.twig', [
-        ]);
-    }
-
-
-
 
 }

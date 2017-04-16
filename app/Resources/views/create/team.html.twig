@@ -2,10 +2,20 @@
 
 {% block body %}
 
+{% if sent is defined %}
+
+<h1>The team has been created.</h1>
+
+{% else %}
+
 {{ form_start(form) }}
 {{ form_widget(form) }}
 <input type="submit" value="Create"
           class="btn btn-default pull-right" />
 {{ form_end(form) }}
+
+{% endif %}
+
+
 
 {% endblock %}
