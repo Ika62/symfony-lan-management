@@ -1,0 +1,39 @@
+AppBundle\Entity\Game:
+    type: entity
+    table: game
+    indexes:
+        team1:
+            columns:
+                - team1
+        team2:
+            columns:
+                - team2
+        server:
+            columns:
+                - server
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        team1:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        team2:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        server:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+    lifecycleCallbacks: {  }

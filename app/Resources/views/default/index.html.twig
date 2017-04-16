@@ -1,0 +1,157 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<!-- Choix de la première équipe -->
+
+		<form action="{{ path('veto') }}" name="match" method="POST">
+
+      <div align="center" class="windowContainer">
+			<div align="center" class="window">
+
+				<!-- Choix du format de match -->
+
+				<div class="choicecontainer">
+					<div class="choix">Choix du format du match</div>
+					<label>BO1</label><input type="radio" name="format" value="bo1" checked />
+					<label>BO3</label><input type="radio" name="format" value="bo3" />
+					<label>BO5</label><input type="radio" name="format" value="bo5" />
+				</div>
+
+				<!-- Choix du serveur -->
+
+				<div class="choicecontainer">
+					<div class="choix">Choisir le serveur</div>
+					<select name="serveur" size="8">
+						{% for server in servers %}
+								<option value="{{server.id}}">{{server.name}} ({{server.ip}}:{{server.port}})</option>
+						{% endfor %}
+					</select>
+				</div>
+
+				<div class="choicecontainer">
+					<div class="choix" >Choix de la première équipe</br> </div>
+
+					<div class="teamlist">
+						<input type="hidden" name="equipe1" id="equipe1" />
+            <div>
+              {% for team in teams %}
+                  <a class="team" onclick="selectTeam('equipe1', '{{team.id}}' ,this);">{{team.name}}</a>
+              {% endfor %}
+            </div>
+					</div>
+				</div>
+				<!-- Choix de la deuxième équipe -->
+
+				<div class="choicecontainer">
+					<div class="choix" >Choix de la deuxième équipe</br> </div>
+
+					<div class="teamlist">
+					    <!-- L'input c'est pour pouvoir l'envoyer a l'autre page -->
+					    <input type="hidden" name="equipe2" id="equipe2" />
+							<div>
+                {% for team in teams %}
+                    <a class="team" onclick="selectTeam('equipe2', '{{team.id}}', this);">{{team.name}}</a>
+                {% endfor %}
+					    </div>
+					</div>
+				</div>
+
+				<div class="choicecontainer">
+					<!-- Bouton pour creer le match après toutes les informations -->
+
+					<input name="valider" type = "submit" value = "Créer le match" />
+				</div>
+
+			</div>
+    </div>
+
+		</form>
+
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+  body {
+  		margin:0;
+  		padding:0;
+  		background-color: #242424;
+  		margin:auto;
+  	}
+
+  .windowContainer {
+    padding: 10px;
+  }
+  .window {
+    max-width: 1200px;
+    padding: 10px;
+    background-color: #F1F1F1;
+  }
+
+  .choix{
+      border: none;
+      background-image: linear-gradient(to top, #C43E2F, #D16428);
+      box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 0px 1px 1px #F3AB46 inset;
+      color: white;
+      padding: 5px;
+      width: 100%;
+      text-align:center;
+      font-weight: bold;
+  		margin-bottom: 4px;
+  }
+
+  .choicecontainer {
+  	display: block;
+  	max-width: 1200px;
+  	margin-top: 15px;
+  	background-color:#FFF;
+  	padding: 4px;
+  }
+
+  .teamlist {
+    columns: 4 200px;
+    column-gap: 4px;
+    -moz-column-gap: 2px;
+    -moz-column-count: 4;
+    -moz-column-width: 200px;
+
+  }
+
+  .team {
+    column-span: all;
+  	padding: 2px;
+    margin:2px;
+  	cursor: pointer; /* Pour que la souris soit un pointeur en gros ça change la forme */
+  	display: inline-block;
+  	height: 40px;
+    min-width: 200px;
+    width: 100%;
+  	border: solid 1px #597fa3;
+  	text-align:center;
+  	background-color: #597fa3;
+  	opacity: 0.6; /* L'opacité est a 70% de base ==> voir hover */
+  	color: #FFF !important;
+  	border-radius: 3px; /* Les coins en arrondi */
+  }
+
+  .team:hover, .team.selected { /* Quand on passe sur le nom des équipes, ça fait ceci : */
+  	color: #FFF;
+  	text-decoration:none;
+  	opacity: 1;
+  }
+</style>
+{% endblock %}
+
+
+{% block javascripts %}
+<script>
+  function selectTeam(team, teamId, link) {
+  	document.getElementById(team).value = teamId;
+  	var links = document.querySelectorAll("#"+team+" + div a.team")
+  	for (i = 0; i < links.length; i++) {
+      links[i].classList.remove("selected");
+    }
+  	link.classList.add("selected");
+  }
+</script>
+{% endblock %}

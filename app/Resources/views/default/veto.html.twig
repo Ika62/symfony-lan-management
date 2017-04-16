@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div id="nomEquipe1">Nom de l'équipe de gauche</br>
+{{game.team1.name}}
+</div></p>
+
+<div id="nomEquipe2">Nom de l'équipe de droite</br>
+{{game.team2.name}}
+</div></p>
+<!-- Choix de la map -->
+
+<div id="listeMap"></p>Voici la liste des maps</p>
+
+  <!-- Quand on met un espace dans classe, ça veut dire que c'est 2 classe. Donc ici, la classe map et pending. -->
+  <input name="inf" type="button" value="de_inferno" class="map pending" onclick="veto(this, '{{bo}}')" />
+  <input name="nuke" type="button" value="de_nuke" class="map pending" onclick="veto(this, '{{bo}}')" />
+  <input name="cbb" type="button" value="de_cbble" class="map pending" onclick="veto(this, '{{bo}}')" />
+  <input name="mir" type="button" value="de_mirage" class="map pending" onclick="veto(this, '{{bo}}')" />
+  <input name="cac" type="button" value="de_cache" class="map pending" onclick="veto(this, '{{bo}}')" />
+  <input name="over" type="button" value="de_overpass" class="map pending" onclick="veto(this, '{{bo}}')" />
+  <input name="trn" type="button" value="de_train" class="map pending" onclick="veto(this, '{{bo}}')" />
+
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+<script>
+	function veto(map, bo) {
+
+		var pick = function(map) {
+				map.style.textDecoration = "underline";
+				done(map);
+		}
+
+		var ban = function(map) {
+				//Ici, on barre la map
+				map.style.textDecoration = "line-through";
+			done(map);
+		}
+
+		var remaining = function(times) {
+				// On répère le nombre de fois passé en paramètre
+				for(i=0;i<times;i++) {
+						 // On selectionne la map restante qui n'a plus la classe pending
+						var remainingMap = document.querySelector('input[type=button].pending');
+						remainingMap.style.textDecoration = "underline";
+					done(remainingMap);
+				}
+		}
+
+		var done = function(map) {
+				// On supprime la classe "pending"
+			map.classList.remove("pending");
+			// On désactive le bouton map
+			map.disabled = "true";
+		}
+
+		//Le compteur est = à lui même, ou à 7 s'il n'est pas défini. (au début quoi)
+		veto.counter = veto.counter || 7;
+
+		//Ici on indique que c'est la première team qui veto (celle de gauche) : c'est un boolean
+		veto.firstTeam = veto.firstTeam || true;
+
+		//Vu que dans les 3 cas, il y a 2 bans on fait ce test.
+		if( veto.counter == 7) {
+		    ban(map, veto.firstTeam);
+		}
+		if(veto.counter == 6) {
+		    ban(map, veto.firstTeam);
+		     if(bo == "bo5") {
+		       remaining(5);
+		    }
+		}
+
+		else {
+	    	if ( bo == "bo1" ) {
+			    if ( veto.counter != 1) {
+			        ban(map, veto.firstTeam);
+			    }
+			    else pick(map, veto.firstTeam);
+	    	}
+	    	else if ( bo == "bo3" )	{
+				if( veto.counter == 5 || veto.counter == 4){
+	    			pick(map, veto.firstTeam);
+				}
+				else ban(map, veto.firstTeam);
+	    	}
+	    }
+
+			veto.counter--;
+			veto.firstTeam = !veto.firstTeam;
+
+	    if(veto.counter == 1) {
+	        remaining(1);
+	    }
+	}
+</script>
+{% endblock %}

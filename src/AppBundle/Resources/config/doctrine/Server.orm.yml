@@ -1,0 +1,31 @@
+AppBundle\Entity\Server:
+    type: entity
+    table: server
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        ip:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: false
+        port:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        name:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }
