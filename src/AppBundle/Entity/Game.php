@@ -25,7 +25,7 @@ class Game
      * @var Team
      *
      * @ORM\JoinColumn(name="team1", referencedColumnName="id")
-     * @ORM\OneToOne(targetEntity="Team", mappedBy="games")
+     * @ORM\OneToOne(targetEntity="Team")
      */
     private $team1;
 
@@ -33,7 +33,7 @@ class Game
      * @var Team
      *
      * @ORM\JoinColumn(name="team2", referencedColumnName="id")
-     * @ORM\OneToOne(targetEntity="Team", mappedBy="games")
+     * @ORM\OneToOne(targetEntity="Team")
      */
     private $team2;
 
@@ -41,7 +41,7 @@ class Game
      * @var Server
      *
      * @ORM\JoinColumn(name="server", referencedColumnName="id")
-     * @ORM\OneToOne(targetEntity="Server", mappedBy="games")
+     * @ORM\OneToOne(targetEntity="Server")
      */
     private $server;
 

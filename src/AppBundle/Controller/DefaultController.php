@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Team;
 use AppBundle\Entity\Game;
 use AppBundle\Entity\Server;
+use AppBundle\Form\TeamType;
 
 class DefaultController extends Controller
 {
@@ -54,4 +55,38 @@ class DefaultController extends Controller
           'bo'=>$boField,
         ]);
     }
+
+    /**
+     * @Route("/team", name="team")
+     */
+    public function teamAction(Request $request)
+    {
+        $team = new Team();
+        $form = $this->createForm(TeamType::class, $team);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $team = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($team);
+            $em->flush();
+            return $this->redirectToRoute('team_creation_success');
+        }
+        return $this->render('default/team.html.twig', [
+          'form'=>$form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/team/created", name="team_creation_success")
+     */
+    public function teamCreatedSuccessAction(Request $request)
+    {
+        return $this->render('default/team_created.html.twig', [
+        ]);
+    }
+
+
+
+
 }
