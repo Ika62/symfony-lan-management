@@ -9,6 +9,7 @@ use AppBundle\Entity\Team;
 use AppBundle\Entity\Game;
 use AppBundle\Entity\Server;
 use AppBundle\Form\TeamType;
+use AppBundle\Form\ServerType;
 
 class DefaultController extends Controller
 {
@@ -78,5 +79,29 @@ class DefaultController extends Controller
           'form'=>$form->createView(),
         ]);
     }
+
+
+        /**
+         * @Route("/servers/create", name="server_create")
+         */
+        public function serverAction(Request $request)
+        {
+            $server = new Server();
+            $form = $this->createForm(ServerType::class, $server);
+
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $team = $form->getData();
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($team);
+                $em->flush();
+                return $this->render('create/server.html.twig', [
+                  'sent'=>true,
+                ]);
+            }
+            return $this->render('create/server.html.twig', [
+              'form'=>$form->createView(),
+            ]);
+        }
 
 }
