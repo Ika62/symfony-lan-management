@@ -18,11 +18,19 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        return $this->render('default/index.html.twig');
+    }
+
+    /**
+     * @Route("/match/create", name="match_create")
+     */
+    public function matchAction(Request $request)
+    {
         $teamRepository = $this->getDoctrine()->getRepository('AppBundle:Team');
         $serverRepository = $this->getDoctrine()->getRepository('AppBundle:Server');
         $teams = $teamRepository->findAll();
         $servers = $serverRepository->findAll();
-        return $this->render('default/index.html.twig', [
+        return $this->render('match/create.html.twig', [
              'teams'=>$teams,
              'servers'=>$servers,
         ]);
@@ -51,7 +59,7 @@ class DefaultController extends Controller
         $em->persist($game);
         $em->flush();
 
-        return $this->render('default/veto.html.twig', [
+        return $this->render('match/veto.html.twig', [
           'game'=>$game,
           'bo'=>$boField,
         ]);
@@ -71,11 +79,11 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($team);
             $em->flush();
-            return $this->render('create/team.html.twig', [
+            return $this->render('team/create.html.twig', [
               'sent'=>true,
             ]);
         }
-        return $this->render('create/team.html.twig', [
+        return $this->render('team/create.html.twig', [
           'form'=>$form->createView(),
         ]);
     }
@@ -95,11 +103,11 @@ class DefaultController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($team);
                 $em->flush();
-                return $this->render('create/server.html.twig', [
+                return $this->render('server/create.html.twig', [
                   'sent'=>true,
                 ]);
             }
-            return $this->render('create/server.html.twig', [
+            return $this->render('server/create.html.twig', [
               'form'=>$form->createView(),
             ]);
         }
