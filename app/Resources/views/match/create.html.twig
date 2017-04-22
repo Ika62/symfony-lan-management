@@ -6,25 +6,25 @@
 
 		<form action="{{ path('veto') }}" name="match" method="POST">
 				<!-- Choix du format de match -->
+				<div class="multipleChoices">
+						<div class="choicecontainer multiple half">
+							<div class="choix">Choix du format du match</div>
+							<label>BO1</label><input type="radio" name="format" value="bo1" checked />
+							<label>BO3</label><input type="radio" name="format" value="bo3" />
+							<label>BO5</label><input type="radio" name="format" value="bo5" />
+						</div>
 
-				<div class="choicecontainer">
-					<div class="choix">Choix du format du match</div>
-					<label>BO1</label><input type="radio" name="format" value="bo1" checked />
-					<label>BO3</label><input type="radio" name="format" value="bo3" />
-					<label>BO5</label><input type="radio" name="format" value="bo5" />
+						<!-- Choix du serveur -->
+
+						<div class="choicecontainer multiple half">
+							<div class="choix">Choisir le serveur</div>
+							<select name="serveur" size="8">
+								{% for server in servers %}
+										<option value="{{server.id}}">{{server.name}} ({{server.ip}}:{{server.port}})</option>
+								{% endfor %}
+							</select>
+						</div>
 				</div>
-
-				<!-- Choix du serveur -->
-
-				<div class="choicecontainer">
-					<div class="choix">Choisir le serveur</div>
-					<select name="serveur" size="8">
-						{% for server in servers %}
-								<option value="{{server.id}}">{{server.name}} ({{server.ip}}:{{server.port}})</option>
-						{% endfor %}
-					</select>
-				</div>
-
 				<div class="choicecontainer">
 					<div class="choix" >Choix de la première équipe</br> </div>
 
@@ -53,11 +53,10 @@
 					</div>
 				</div>
 
-				<div class="choicecontainer">
 					<!-- Bouton pour creer le match après toutes les informations -->
 
 					<input name="valider" type = "submit" value = "Créer le match" />
-				</div>
+
 
 		</form>
 
@@ -83,7 +82,32 @@
   	margin-top: 15px;
   	background-color:#FFF;
   	padding: 4px;
+		min-height: 205px;
   }
+
+	.multipleChoices {
+		width: 100%;
+		min-height: 200px;
+	}
+
+	.choicecontainer.multiple {
+		display: inline-block;
+		width:50%;
+		height: 100%;
+		float:left;
+		margin-top: 0;
+	}
+	.choicecontainer.multiple.half {
+		width:50%;
+	}
+
+	.choicecontainer.multiple.three {
+		width:33%;
+	}
+
+	.choicecontainer.multiple.four {
+		width:25%;
+	}
 
   .teamlist {
     columns: 4 200px;
