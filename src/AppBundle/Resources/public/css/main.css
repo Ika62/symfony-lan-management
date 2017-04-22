@@ -1,0 +1,16 @@
+body {
+    margin:0;
+    padding:0;
+    background-color: #242424;
+    margin:auto;
+  }
+
+.windowContainer {
+  padding: 10px;
+}
+
+.window {
+  max-width: 1200px;
+  padding: 10px;
+  background-color: #F1F1F1;
+}

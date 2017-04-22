@@ -53,6 +53,7 @@
         "sort-packages": true
     },
     "extra": {
+		"symfony-assets-install": "symlink",
         "symfony-app-dir": "app",
         "symfony-bin-dir": "bin",
         "symfony-var-dir": "var",

@@ -5,10 +5,6 @@
 <!-- Choix de la première équipe -->
 
 		<form action="{{ path('veto') }}" name="match" method="POST">
-
-      <div align="center" class="windowContainer">
-			<div align="center" class="window">
-
 				<!-- Choix du format de match -->
 
 				<div class="choicecontainer">
@@ -63,31 +59,12 @@
 					<input name="valider" type = "submit" value = "Créer le match" />
 				</div>
 
-			</div>
-    </div>
-
 		</form>
 
 {% endblock %}
 
 {% block stylesheets %}
 <style>
-  body {
-  		margin:0;
-  		padding:0;
-  		background-color: #242424;
-  		margin:auto;
-  	}
-
-  .windowContainer {
-    padding: 10px;
-  }
-  .window {
-    max-width: 1200px;
-    padding: 10px;
-    background-color: #F1F1F1;
-  }
-
   .choix{
       border: none;
       background-image: linear-gradient(to top, #C43E2F, #D16428);

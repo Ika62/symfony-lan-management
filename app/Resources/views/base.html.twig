@@ -4,11 +4,16 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="stylesheet" href="{{ asset('bundles/app/css/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/app/css/main.css') }}">
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
+      <div align="center" class="windowContainer">
+        <div align="center" class="window">
+          {% block body %}{% endblock %}
+        </div>
+      </div>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
