@@ -1,16 +1,72 @@
 body {
     margin:0;
     padding:0;
-    background-color: #242424;
+    padding-top: 20px;
+    background-color: #000;
     margin:auto;
   }
 
-.windowContainer {
+header {
+  margin:auto;
+  max-width: 1200px;
+  height: 100px;
+  line-height: 100px;
+  color: #FFF;
+  text-align:center;
+  background-color: #242424;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
+.navbar {
+  max-width: 1200px;
+  margin:auto;
+  border-radius:0;
+  background:none;
+  background-image: linear-gradient(to top, #c43e2f, #d16428);
+  border-color: #c43e2f !important;
+}
+
+.dropdown-menu {
+    background-image: linear-gradient(to top, #c43e2f, #d16428);
+}
+
+.navbar a, .navbar-brand {
+    color: #FFF !important;
+}
+
+.navbar li.active a, li.dropdown.open a.dropdown-toggle {
+    color: #000 !important;
+    background-color: #F1F1F1 !important;
+    border:0;
+}
+
+.social a {
+    display: inline-block;
+    float: right;
+    height: 24px;
+    width: 30px;
+    margin-left: 5px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    background-repeat: no-repeat;
+    background-position: top left;
+    text-align: center;
+}
+
+.windowContainer {
+  padding-left:0;
+  padding-right:0;
+}
 .window {
   max-width: 1200px;
-  padding: 10px;
+  padding: 4px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   background-color: #F1F1F1;
 }
