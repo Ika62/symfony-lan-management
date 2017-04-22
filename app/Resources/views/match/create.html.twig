@@ -7,7 +7,7 @@
 		<form action="{{ path('veto') }}" name="match" method="POST">
 				<!-- Choix du format de match -->
 				<div class="multipleChoices">
-						<div class="choicecontainer multiple half">
+						<div class="choicecontainer multiple" style="width:30%">
 							<div class="choix">Choix du format du match</div>
 							<label>BO1</label><input type="radio" name="format" value="bo1" checked />
 							<label>BO3</label><input type="radio" name="format" value="bo3" />
@@ -16,7 +16,7 @@
 
 						<!-- Choix du serveur -->
 
-						<div class="choicecontainer multiple half">
+						<div class="choicecontainer multiple">
 							<div class="choix">Choisir le serveur</div>
 							<select name="serveur" size="8">
 								{% for server in servers %}
@@ -79,35 +79,39 @@
   .choicecontainer {
   	display: block;
   	max-width: 1200px;
-  	margin-top: 15px;
-  	background-color:#FFF;
+  	margin-top: 4px;
+		background-color:#FFF;
   	padding: 4px;
 		min-height: 205px;
+		text-align: center;
   }
 
 	.multipleChoices {
+		display: table;
+    border-collapse:separate;
+		border-spacing: 4px;
 		width: 100%;
 		min-height: 200px;
+		overflow:auto;
 	}
 
-	.choicecontainer.multiple {
-		display: inline-block;
-		width:50%;
+	.multipleChoices > .choicecontainer.multiple {
+		display: table-cell;
+		width:100%;
 		height: 100%;
-		float:left;
-		margin-top: 0;
-	}
-	.choicecontainer.multiple.half {
-		width:50%;
+		margin-bottom: 10px;
 	}
 
-	.choicecontainer.multiple.three {
-		width:33%;
+	.multipleChoices > .choicecontainer.multiple:last-child {
+		margin-bottom: 0px;
 	}
 
-	.choicecontainer.multiple.four {
-		width:25%;
-	}
+	@media (max-width: 800px) {
+    .multipleChoices > .choicecontainer.multiple {
+        display: block !important;
+				width:100% !important;
+    }
+}
 
   .teamlist {
     columns: 4 200px;
@@ -115,7 +119,6 @@
     -moz-column-gap: 2px;
     -moz-column-count: 4;
     -moz-column-width: 200px;
-
   }
 
   .team {
